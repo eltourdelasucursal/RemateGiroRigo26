@@ -254,6 +254,24 @@
   footer .display{color:#FFE3F2;text-shadow:var(--glow-rosa);font-size:1.6rem;margin-bottom:6px}
   footer .giro{margin-top:14px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--rosa);opacity:.8}
 
+  /* ---------- Consulta de estado ---------- */
+  .consulta{max-width:640px;margin:0 auto;background:rgba(13,31,19,.92);border:1.5px solid rgba(168,216,60,.45);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 0 40px rgba(168,216,60,.15)}
+  .consulta-form{display:flex;gap:10px;flex-wrap:wrap}
+  .consulta-form input{flex:1 1 220px}
+  .consulta-form .btn{flex:0 0 auto}
+  .resultado{margin-top:20px;display:none}
+  .resultado.show{display:block;animation:entra .3s ease}
+  .res-card{border-radius:16px;padding:18px 20px;background:rgba(7,19,11,.7);border-left:5px solid var(--lima)}
+  .res-card + .res-card{margin-top:10px}
+  .res-card .estado{display:inline-block;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+  .res-card h4{font-family:'Righteous';font-weight:400;font-size:1.3rem;margin-bottom:4px}
+  .res-card p{font-size:.9rem;opacity:.88}
+  .res-card .meta{font-size:.78rem;opacity:.65;margin-top:6px}
+  .est-aprobado{border-left-color:var(--lima)} .est-aprobado .estado{background:var(--lima);color:var(--noche)}
+  .est-pendiente{border-left-color:#F9CE34} .est-pendiente .estado{background:#F9CE34;color:var(--noche)}
+  .est-rechazado{border-left-color:#FF4D4D} .est-rechazado .estado{background:#FF4D4D;color:#fff}
+  .est-nada{border-left-color:var(--neon)}
+  .mini-spin{width:22px;height:22px;border-width:3px;margin:0}
   /* ---------- Contacto Instagram ---------- */
   .ig-grad{background:linear-gradient(45deg,#F9CE34,#EE2A7B 45%,#6228D7)}
   .ig-fab{position:fixed;right:18px;bottom:18px;z-index:60;color:#fff;border:none;border-radius:999px;display:flex;align-items:center;gap:8px;padding:12px 18px 12px 14px;font-family:'Poppins';font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 0 22px rgba(238,42,123,.6);animation:late 2.5s infinite}
@@ -286,7 +304,7 @@
     .cd{width:72px}
     .ig-fab .txt{display:none}
     .ig-fab{padding:14px}
-    header.top .btn{display:none}
+    header.top .btn-rosa{display:none}
     .beam{width:60vw}
     .letrero{padding:18px 18px 14px}
   }
@@ -300,7 +318,7 @@
 <header class="top">
   <div class="wrap">
     <a href="#" class="mini-logo">Remate <span>· La Pérgola</span></a>
-    <a href="#registro" class="btn btn-rosa btn-sm">Quiero mi entrada</a>
+    <span style="display:flex;gap:8px"><a href="#consulta" class="btn btn-ghost btn-sm">Consultar pago</a><a href="#registro" class="btn btn-rosa btn-sm">Quiero mi entrada</a></span>
   </div>
 </header>
 
@@ -508,6 +526,22 @@
   </div>
 </section>
 
+<!-- ================= CONSULTA ================= -->
+<section id="consulta" class="bg-osc">
+  <div class="wrap">
+    <span class="eyebrow">Mi entrada</span>
+    <h2 class="sec-title">Consulta el estado de tu pago</h2>
+    <p class="sec-sub">Escribe tu número de documento y revisa si tu pago ya fue verificado.</p>
+    <div class="consulta">
+      <form class="consulta-form" id="form-consulta" novalidate>
+        <input id="doc-consulta" inputmode="numeric" maxlength="15" placeholder="Número de documento" aria-label="Número de documento" autocomplete="off">
+        <button type="submit" class="btn btn-lima" id="btn-consulta">🔎 Consultar</button>
+      </form>
+      <div class="resultado" id="resultado" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FAQ ================= -->
 <section class="bg-osc">
   <div class="wrap" style="max-width:820px">
@@ -516,7 +550,7 @@
     <p class="sec-sub">¿Otra duda? Escríbele por Instagram a cualquiera de las organizadoras.</p>
     <div class="contacto-org" id="contacto-org"></div>
     <details><summary>¿Puedo pagar por varias personas en una sola transferencia?</summary><p>Sí. Selecciona cuántas personas van, transfiere el total y registra los datos de cada una. Todas quedan asociadas al mismo comprobante.</p></details>
-    <details><summary>¿Cuándo me confirman la entrada?</summary><p>Después de validar la transferencia te contactamos por WhatsApp al número del titular del registro (asistente 1).</p></details>
+    <details><summary>¿Cuándo me confirman la entrada?</summary><p>Después de validar la transferencia te contactamos por WhatsApp al número del titular del registro (asistente 1). También puedes revisar el estado en cualquier momento con tu número de documento en <a href="#consulta">Consulta tu pago</a>.</p></details>
     <details><summary>¿Qué debo llevar el día de la fiesta?</summary><p>Tu documento de identidad. Con él te buscamos en la lista de registrados en la entrada de La Pérgola.</p></details>
     <details><summary>¿Dónde queda La Pérgola?</summary><p><span id="txt-direccion"></span> <a class="js-mapa" target="_blank" rel="noopener">Ver en Google Maps</a></p></details>
   </div>
@@ -828,7 +862,7 @@ $('#form').addEventListener('submit', async e => {
 
     modal(`<div style="font-size:2.6rem">🎉</div><h3>¡Quedaste en la lista!</h3>
       <p>Registramos <strong>${personas.length} ${personas.length === 1 ? 'persona' : 'personas'}</strong>. Validaremos el pago y te confirmaremos por WhatsApp.</p>
-      <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código de registro.</p>`);
+      <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código de registro. Puedes revisar el estado de tu pago con tu documento en la sección <a href="#consulta" onclick="cerrarModal()">Consulta tu pago</a>.</p>`);
     $('#form').reset(); $('#quitar').click(); cantidad = 1; cont.innerHTML = ''; renderPersonas();
   } catch (err) {
     alerta('No pudimos registrarte', `${err.message}<br><br>Intenta de nuevo o escríbenos por Instagram: ${CONFIG.ORGANIZADORAS.map(o => `<a href="${o.url}" target="_blank" rel="noopener">${o.nombre}</a>`).join(' · ')}.`);
@@ -836,6 +870,53 @@ $('#form').addEventListener('submit', async e => {
     btn.disabled = false;
   }
 });
+/* ---------- Consulta de estado de pago ---------- */
+const ESTADOS = {
+  'Aprobado':  { cls: 'est-aprobado',  icono: '✅', titulo: '¡Pago verificado!', texto: 'Tu entrada está confirmada. Lleva tu documento de identidad y nos vemos en la pista. 💃' },
+  'Pendiente': { cls: 'est-pendiente', icono: '⏳', titulo: 'Pago en revisión',   texto: 'Recibimos tu registro y estamos validando la transferencia. Vuelve a consultar más tarde.' },
+  'Rechazado': { cls: 'est-rechazado', icono: '⚠️', titulo: 'Pago no verificado', texto: 'No pudimos validar tu transferencia. Escríbele por Instagram a una de las organizadoras.' }
+};
+$('#form-consulta').addEventListener('submit', async e => {
+  e.preventDefault();
+  const input = $('#doc-consulta'), out = $('#resultado'), btn = $('#btn-consulta');
+  const doc = input.value.trim();
+  if (!/^[A-Za-z0-9]{5,15}$/.test(doc)) { marcar(input, false); input.focus(); return; }
+  marcar(input, true);
+  btn.disabled = true; btn.innerHTML = '<span class="spinner mini-spin"></span> Consultando';
+  out.classList.add('show');
+  out.innerHTML = '';
+  try {
+    let res;
+    if (CONFIG.SCRIPT_URL.startsWith('PEGAR')) {
+      await new Promise(r => setTimeout(r, 800));
+      res = { ok: true, registros: [{ nombre: 'Demo D.', estado: 'Pendiente', codigo: 'DEMO-0001', fecha: '2026-10-27' }] };
+    } else {
+      const r = await fetch(`${CONFIG.SCRIPT_URL}?accion=consulta&doc=${encodeURIComponent(doc)}`);
+      res = await r.json();
+    }
+    if (!res.ok) throw new Error(res.error || 'Error desconocido');
+    if (!res.registros || !res.registros.length) {
+      out.innerHTML = `<div class="res-card est-nada"><h4>No encontramos registros</h4>
+        <p>No hay inscripciones con ese documento. Revisa el número o, si ya pagaste, escríbele a una de las organizadoras por Instagram.</p></div>`;
+      return;
+    }
+    out.innerHTML = res.registros.map(r => {
+      const e = ESTADOS[r.estado] || ESTADOS['Pendiente'];
+      const obs = r.observaciones ? `<p style="margin-top:6px"><strong>Nota:</strong> ${escapeHTML(r.observaciones)}</p>` : '';
+      return `<div class="res-card ${e.cls}">
+        <span class="estado">${e.icono} ${escapeHTML(r.estado || 'Pendiente')}</span>
+        <h4>${e.titulo}</h4>
+        <p>Hola <strong>${escapeHTML(r.nombre)}</strong> 👋 ${e.texto}</p>${obs}
+        <div class="meta">Código ${escapeHTML(r.codigo)} · Registrado el ${escapeHTML(r.fecha)}</div>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    out.innerHTML = `<div class="res-card est-rechazado"><h4>No pudimos consultar</h4><p>${escapeHTML(err.message)}. Intenta de nuevo en un momento.</p></div>`;
+  } finally {
+    btn.disabled = false; btn.innerHTML = '🔎 Consultar';
+  }
+});
+function escapeHTML(t){ return String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 </script>
 </body>
 </html>
