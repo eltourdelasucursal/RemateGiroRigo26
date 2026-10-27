@@ -254,9 +254,24 @@
   footer .display{color:#FFE3F2;text-shadow:var(--glow-rosa);font-size:1.6rem;margin-bottom:6px}
   footer .giro{margin-top:14px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--rosa);opacity:.8}
 
-  /* ---------- WhatsApp ---------- */
-  .wa{position:fixed;right:18px;bottom:18px;z-index:60;background:#25D366;color:#fff;border-radius:999px;display:flex;align-items:center;gap:8px;padding:12px 18px 12px 14px;font-weight:700;text-decoration:none;box-shadow:0 0 22px rgba(37,211,102,.55);animation:late 2.5s infinite}
-  .wa svg{width:26px;height:26px}
+  /* ---------- Contacto Instagram ---------- */
+  .ig-grad{background:linear-gradient(45deg,#F9CE34,#EE2A7B 45%,#6228D7)}
+  .ig-fab{position:fixed;right:18px;bottom:18px;z-index:60;color:#fff;border:none;border-radius:999px;display:flex;align-items:center;gap:8px;padding:12px 18px 12px 14px;font-family:'Poppins';font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 0 22px rgba(238,42,123,.6);animation:late 2.5s infinite}
+  .ig-fab svg{width:26px;height:26px}
+  .ig-menu{position:fixed;right:18px;bottom:84px;z-index:61;width:270px;background:var(--noche-2);border:1.5px solid var(--neon);border-radius:18px;padding:16px;box-shadow:0 0 30px rgba(255,93,184,.45);display:none}
+  .ig-menu.show{display:block;animation:entra .25s ease}
+  .ig-menu h4{font-family:'Righteous';font-weight:400;color:#FFE3F2;font-size:1.1rem;margin-bottom:2px}
+  .ig-menu p{font-size:.8rem;opacity:.75;margin-bottom:12px}
+  .ig-link{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:#fff;background:rgba(255,255,255,.05);margin-bottom:8px;transition:background .15s,transform .15s}
+  .ig-link:hover{background:rgba(255,93,184,.18);transform:translateX(3px)}
+  .ig-link .av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Righteous';font-size:1.05rem;flex-shrink:0}
+  .ig-link b{display:block;font-size:.95rem}
+  .ig-link small{font-size:.75rem;opacity:.7}
+  .ig-link .dm{margin-left:auto;font-size:.72rem;font-weight:800;color:var(--lima);letter-spacing:1px}
+  .ig-cerrar{position:absolute;top:8px;right:12px;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;opacity:.7}
+  .contacto-org{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:-22px 0 34px}
+  .contacto-org a{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;box-shadow:0 0 14px rgba(238,42,123,.45)}
+  .contacto-org svg{width:18px;height:18px}
   @keyframes late{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
   @media (max-width:820px){
@@ -269,8 +284,8 @@
     .grid,.metodos{grid-template-columns:1fr}
     .contador .total{margin-left:0;text-align:left;width:100%}
     .cd{width:72px}
-    .wa .txt{display:none}
-    .wa{padding:14px}
+    .ig-fab .txt{display:none}
+    .ig-fab{padding:14px}
     header.top .btn{display:none}
     .beam{width:60vw}
     .letrero{padding:18px 18px 14px}
@@ -498,7 +513,8 @@
   <div class="wrap" style="max-width:820px">
     <span class="eyebrow">Dudas</span>
     <h2 class="sec-title">Preguntas frecuentes</h2>
-    <p class="sec-sub">¿Otra duda? Escríbenos por WhatsApp.</p>
+    <p class="sec-sub">¿Otra duda? Escríbele por Instagram a cualquiera de las organizadoras.</p>
+    <div class="contacto-org" id="contacto-org"></div>
     <details><summary>¿Puedo pagar por varias personas en una sola transferencia?</summary><p>Sí. Selecciona cuántas personas van, transfiere el total y registra los datos de cada una. Todas quedan asociadas al mismo comprobante.</p></details>
     <details><summary>¿Cuándo me confirman la entrada?</summary><p>Después de validar la transferencia te contactamos por WhatsApp al número del titular del registro (asistente 1).</p></details>
     <details><summary>¿Qué debo llevar el día de la fiesta?</summary><p>Tu documento de identidad. Con él te buscamos en la lista de registrados en la entrada de La Pérgola.</p></details>
@@ -513,11 +529,17 @@
   <p style="margin-top:10px;opacity:.6">Evento para mayores de edad. Consume con responsabilidad.</p>
 </footer>
 
-<!-- WhatsApp flotante -->
-<a class="wa" id="wa" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1.1-1.7-1.6-3.6-1.6-5.5 0-5.8 4.8-10.5 10.7-10.5s10.6 4.7 10.6 10.5-4.7 10.7-10.6 10.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>
+<!-- Contacto Instagram flotante -->
+<div class="ig-menu" id="ig-menu" role="dialog" aria-label="Escríbele a una organizadora">
+  <button class="ig-cerrar" type="button" id="ig-cerrar" aria-label="Cerrar">×</button>
+  <h4>¿Tienes preguntas?</h4>
+  <p>Escríbele por DM a una de las organizadoras:</p>
+  <div id="ig-lista"></div>
+</div>
+<button class="ig-fab ig-grad" type="button" id="ig-fab" aria-expanded="false" aria-controls="ig-menu">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
   <span class="txt">¿Preguntas?</span>
-</a>
+</button>
 
 <!-- Modal -->
 <div class="modal" id="modal"><div class="modal-box" id="modal-box"></div></div>
@@ -535,8 +557,12 @@ const CONFIG = {
   NEQUI_TITULAR: 'Kathe Jimenez', // DUMMY
   LLAVE_BREB: '@DAVICCA133',         // DUMMY
   LLAVE_TITULAR: 'Claudia Cifuentes', // DUMMY
-  WHATSAPP: '3012648660',              // DUMMY (formato internacional, sin +)
-  WHATSAPP_MSG: 'Hola, tengo una pregunta sobre la Fiesta de Remate del Giro de Rigo 🎉',
+  // Organizadoras: enlaces directos al DM de Instagram
+  ORGANIZADORAS: [
+    { nombre: 'Kathe',  usuario: 'kathejimenez22', url: 'https://ig.me/m/kathejimenez22' },
+    { nombre: 'Jimena', usuario: 'jimenac_1111',   url: 'https://ig.me/m/jimenac_1111' },
+    { nombre: 'Cata',   usuario: 'catavasquez91',  url: 'https://ig.me/m/catavasquez91' }
+  ],
   DIRECCION: 'Cra. 2 # 13-42, barrio San Pedro, centro de Cali.',
   MAPA: 'https://www.google.com/maps/search/?api=1&query=La+P%C3%A9rgola+Clandestina+Cali',
   FECHA_EVENTO: '2026-11-01T20:00:00-05:00',
@@ -577,7 +603,26 @@ document.querySelectorAll('.js-dir').forEach(s => s.textContent = CONFIG.DIRECCI
   const frase = 'FIESTA DE REMATE <span>✦</span> LA PÉRGOLA <span>✦</span> SALSA CALEÑA <span>✦</span> DOMINGO 1 NOV · 8 P.M. <span>✦</span> EL GIRO DE RIGO <span>✦</span> ';
   document.getElementById('cinta-txt').innerHTML = frase.repeat(6);
 })();
-$('#wa').href = `https://wa.me/${CONFIG.WHATSAPP}?text=${encodeURIComponent(CONFIG.WHATSAPP_MSG)}`;
+/* ---------- Contacto por Instagram ---------- */
+const IG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>';
+const COLORES_AV = ['#FF5DB8','#A8D83C','#F6A0CE'];
+$('#ig-lista').innerHTML = CONFIG.ORGANIZADORAS.map((o, i) => `
+  <a class="ig-link" href="${o.url}" target="_blank" rel="noopener">
+    <span class="av" style="background:${COLORES_AV[i % 3]};color:#07130B">${o.nombre[0]}</span>
+    <span><b>${o.nombre}</b><small>@${o.usuario}</small></span>
+    <span class="dm">DM ›</span>
+  </a>`).join('');
+$('#contacto-org').innerHTML = CONFIG.ORGANIZADORAS.map(o =>
+  `<a class="ig-grad" href="${o.url}" target="_blank" rel="noopener">${IG_ICON} ${o.nombre}</a>`).join('');
+function toggleIG(abrir){
+  const m = $('#ig-menu'); const show = abrir ?? !m.classList.contains('show');
+  m.classList.toggle('show', show); $('#ig-fab').setAttribute('aria-expanded', show);
+}
+$('#ig-fab').onclick = e => { e.stopPropagation(); toggleIG(); };
+$('#ig-cerrar').onclick = () => toggleIG(false);
+$('#ig-menu').onclick = e => e.stopPropagation();
+document.addEventListener('click', () => toggleIG(false));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleIG(false); });
 
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
   const t = document.getElementById(b.dataset.copy).textContent.replace(/\s/g,'');
@@ -786,7 +831,7 @@ $('#form').addEventListener('submit', async e => {
       <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código de registro.</p>`);
     $('#form').reset(); $('#quitar').click(); cantidad = 1; cont.innerHTML = ''; renderPersonas();
   } catch (err) {
-    alerta('No pudimos registrarte', `${err.message}<br><br>Intenta de nuevo o escríbenos por <a href="${$('#wa').href}" target="_blank">WhatsApp</a>.`);
+    alerta('No pudimos registrarte', `${err.message}<br><br>Intenta de nuevo o escríbenos por Instagram: ${CONFIG.ORGANIZADORAS.map(o => `<a href="${o.url}" target="_blank" rel="noopener">${o.nombre}</a>`).join(' · ')}.`);
   } finally {
     btn.disabled = false;
   }
