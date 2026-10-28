@@ -254,6 +254,32 @@
   footer .display{color:#FFE3F2;text-shadow:var(--glow-rosa);font-size:1.6rem;margin-bottom:6px}
   footer .giro{margin-top:14px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--rosa);opacity:.8}
 
+  /* ---------- Modalidades de entrada ---------- */
+  .rutas{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .ruta{position:relative;background:rgba(13,31,19,.85);border-radius:var(--radio);padding:28px 24px;border:1.5px solid rgba(168,216,60,.5)}
+  .ruta.vip{border-color:rgba(255,93,184,.6);box-shadow:0 0 24px rgba(255,93,184,.2)}
+  .ruta small{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;opacity:.7}
+  .ruta h3{font-size:1.6rem;color:var(--rosa);margin:2px 0 4px}
+  .ruta .precio{font-family:'Righteous';font-size:2.4rem;color:var(--lima);text-shadow:var(--glow-lima);line-height:1.1;margin-bottom:14px}
+  .ruta.vip .precio{color:#FFE3F2;text-shadow:var(--glow-rosa)}
+  .ruta .precio em{font-family:'Poppins';font-style:normal;font-size:.9rem;text-shadow:none;color:#fff;opacity:.75}
+  .ruta ol{padding-left:20px;display:grid;gap:6px;font-size:.93rem;opacity:.9}
+  .ahorro{position:absolute;top:-13px;right:18px;background:var(--lima);color:var(--noche);font-weight:800;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:999px;box-shadow:var(--glow-lima)}
+  .ruta.vip .ahorro{background:var(--neon);color:#fff;box-shadow:var(--glow-rosa)}
+  .precios{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+  .precios .precio-box{margin-top:0}
+  .modalidades{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px}
+  .modalidad input{display:none}
+  .modalidad > span{display:block;height:100%;padding:16px 18px;border-radius:16px;border:1.5px solid rgba(255,255,255,.2);cursor:pointer;transition:all .15s;background:rgba(7,19,11,.6)}
+  .modalidad b{display:block;font-size:1rem}
+  .modalidad strong{display:block;font-family:'Righteous';font-weight:400;font-size:1.7rem;color:#fff;margin:2px 0}
+  .modalidad small{font-size:.8rem;opacity:.8}
+  .modalidad input:checked + span{border-color:var(--lima);box-shadow:0 0 18px rgba(168,216,60,.4);background:rgba(168,216,60,.1)}
+  .modalidad input:checked + span strong{color:var(--lima)}
+  .modalidad.vip input:checked + span{border-color:var(--neon);box-shadow:0 0 18px rgba(255,93,184,.45);background:rgba(255,93,184,.1)}
+  .modalidad.vip input:checked + span strong{color:#FFE3F2}
+  .aviso-reserva{background:rgba(255,93,184,.08);border:1.5px dashed var(--neon);border-radius:16px;padding:18px 20px;margin-bottom:6px}
+  .aviso-reserva p{font-size:.95rem}
   /* ---------- Consulta de estado ---------- */
   .consulta{max-width:640px;margin:0 auto;background:rgba(13,31,19,.92);border:1.5px solid rgba(168,216,60,.45);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 0 40px rgba(168,216,60,.15)}
   .consulta-form{display:flex;gap:10px;flex-wrap:wrap}
@@ -270,6 +296,7 @@
   .est-aprobado{border-left-color:var(--lima)} .est-aprobado .estado{background:var(--lima);color:var(--noche)}
   .est-pendiente{border-left-color:#F9CE34} .est-pendiente .estado{background:#F9CE34;color:var(--noche)}
   .est-rechazado{border-left-color:#FF4D4D} .est-rechazado .estado{background:#FF4D4D;color:#fff}
+  .est-reservado{border-left-color:var(--neon)} .est-reservado .estado{background:var(--neon);color:#fff}
   .est-nada{border-left-color:var(--neon)}
   .mini-spin{width:22px;height:22px;border-width:3px;margin:0}
   /* ---------- Contacto Instagram ---------- */
@@ -304,6 +331,7 @@
     .cd{width:72px}
     .ig-fab .txt{display:none}
     .ig-fab{padding:14px}
+    .rutas,.precios,.modalidades{grid-template-columns:1fr}
     header.top .btn-rosa{display:none}
     .beam{width:60vw}
     .letrero{padding:18px 18px 14px}
@@ -318,7 +346,7 @@
 <header class="top">
   <div class="wrap">
     <a href="#" class="mini-logo">Remate <span>· La Pérgola</span></a>
-    <span style="display:flex;gap:8px"><a href="#consulta" class="btn btn-ghost btn-sm">Consultar pago</a><a href="#registro" class="btn btn-rosa btn-sm">Quiero mi entrada</a></span>
+    <span style="display:flex;gap:8px"><a href="#consulta" class="btn btn-ghost btn-sm">Consultar</a><a href="#registro" class="btn btn-rosa btn-sm">Quiero mi entrada</a></span>
   </div>
 </header>
 
@@ -442,12 +470,31 @@
   <div class="wrap">
     <span class="eyebrow">Tu entrada</span>
     <h2 class="sec-title">¿Cómo aseguro mi lugar?</h2>
-    <p class="sec-sub">Cuatro pasos y quedas en la lista. Puedes registrar a todo tu parche en una sola transferencia.</p>
-    <div class="pasos">
-      <div class="paso"><div class="num">01</div><h3>Transfiere</h3><p>Paga por Nequi o Llave Bre-B el valor total según el número de personas.</p></div>
-      <div class="paso"><div class="num">02</div><h3>Guarda el comprobante</h3><p>Toma el pantallazo de la transferencia (imagen o PDF).</p></div>
-      <div class="paso"><div class="num">03</div><h3>Regístrate</h3><p>Llena los datos de cada asistente y adjunta el soporte.</p></div>
-      <div class="paso"><div class="num">04</div><h3>¡A la pista!</h3><p>Validamos el pago, te confirmamos por WhatsApp y nos vemos en La Pérgola.</p></div>
+    <p class="sec-sub">Tienes dos opciones. Con las dos quedas en la lista; pagando ya te ahorras <span class="js-ahorro"></span> por persona.</p>
+    <div class="rutas">
+      <div class="ruta">
+        <span class="ahorro">Ahorras <span class="js-ahorro"></span></span>
+        <small>Opción 1</small>
+        <h3>Paga ya</h3>
+        <div class="precio"><span class="js-precio-ant"></span> <em>por persona</em></div>
+        <ol>
+          <li>Transfiere el total por Nequi o Llave Bre-B.</li>
+          <li>Guarda el comprobante (imagen o PDF).</li>
+          <li>Regístrate con los datos de cada asistente y adjunta el soporte.</li>
+          <li>Validamos el pago y quedas confirmado.</li>
+        </ol>
+      </div>
+      <div class="ruta vip">
+        <span class="ahorro">Sin filas</span>
+        <small>Opción 2</small>
+        <h3>Reserva VIP</h3>
+        <div class="precio"><span class="js-precio-sitio"></span> <em>en la entrada</em></div>
+        <ol>
+          <li>Regístrate aquí sin pagar nada.</li>
+          <li>El día de la fiesta, llega a la <strong>entrada VIP</strong> con tu documento.</li>
+          <li>Paga en el sitio y entra sin hacer fila.</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -457,7 +504,7 @@
   <div class="wrap">
     <span class="eyebrow">Pago</span>
     <h2 class="sec-title">Datos para la transferencia</h2>
-    <p class="sec-sub">Transfiere el valor total y conserva el comprobante. Lo necesitas para el registro.</p>
+    <p class="sec-sub">Solo si eliges <strong>pagar ya</strong>: transfiere el valor total y conserva el comprobante para el registro. Si reservas, no tienes que transferir nada.</p>
     <div class="pago-grid">
       <div class="pago-card">
         <h3>Nequi</h3>
@@ -470,7 +517,10 @@
         <div class="pago-row"><div><small>Titular</small><strong id="txt-llave-titular"></strong></div></div>
       </div>
     </div>
-    <div class="precio-box">Valor por persona<b id="txt-precio"></b></div>
+    <div class="precios">
+      <div class="precio-box">Pagando ya<b class="js-precio-ant"></b></div>
+      <div class="precio-box" style="border-color:var(--lima);box-shadow:0 0 24px rgba(168,216,60,.3)">Reserva VIP · pagas en la entrada<b class="js-precio-sitio"></b></div>
+    </div>
   </div>
 </section>
 
@@ -479,9 +529,15 @@
   <div class="wrap">
     <span class="eyebrow">Registro</span>
     <h2 class="sec-title">Entra a la lista del remate</h2>
-    <p class="sec-sub">Una transferencia, varias personas. Cada asistente debe quedar registrado con sus propios datos.</p>
+    <p class="sec-sub">Paga ya o reserva y paga en la entrada VIP. Cada asistente debe quedar registrado con sus propios datos.</p>
 
     <form class="form-card" id="form" novalidate>
+      <h3><span class="dot"></span>¿Cómo quieres tu entrada?</h3>
+      <div class="modalidades">
+        <label class="modalidad"><input type="radio" name="modalidad" value="anticipado" checked><span><b>💸 Pagar ya</b><strong class="js-precio-ant"></strong><small>Transfiere ahora y ahorra <span class="js-ahorro"></span> por persona.</small></span></label>
+        <label class="modalidad vip"><input type="radio" name="modalidad" value="reserva"><span><b>🎟️ Reservar · Entrada VIP</b><strong class="js-precio-sitio"></strong><small>Pagas en la entrada y entras sin hacer fila.</small></span></label>
+      </div>
+
       <h3><span class="dot"></span>¿Cuántas personas van?</h3>
       <div class="contador">
         <div class="ctrl">
@@ -489,12 +545,17 @@
           <output id="cantidad">1</output>
           <button type="button" id="mas" aria-label="Agregar persona">+</button>
         </div>
-        <div class="total"><small>Total a transferir</small><b id="total">$0</b></div>
+        <div class="total"><small id="lbl-total">Total a transferir</small><b id="total">$0</b></div>
       </div>
 
       <h3><span class="dot"></span>Datos de cada asistente</h3>
       <div id="personas"></div>
 
+      <div id="bloque-reserva" class="aviso-reserva" style="display:none">
+        <h3><span class="dot"></span>Tu reserva VIP</h3>
+        <p>🎟️ No tienes que transferir nada ahora. El día de la fiesta llega a la <strong>entrada VIP</strong> de La Pérgola con tu documento, paga <strong class="js-precio-sitio"></strong> por persona y entra sin hacer fila.</p>
+      </div>
+      <div id="bloque-pago">
       <h3><span class="dot"></span>Soporte de pago</h3>
       <label>Medio de pago <span class="req">*</span></label>
       <div class="metodos">
@@ -518,10 +579,12 @@
       <div class="msg-err" id="err-archivo">Adjunta el comprobante de pago.</div>
       <div class="preview" id="preview"><div id="prev-thumb"></div><div><strong id="prev-nombre"></strong><br><small id="prev-peso"></small></div><button type="button" id="quitar">Quitar</button></div>
 
+            </div>
+
       <label class="check"><input type="checkbox" id="habeas"><span>Autorizo el tratamiento de mis datos personales y los de las personas que registro, con el fin exclusivo de gestionar el ingreso al evento, conforme a la Ley 1581 de 2012. Declaro contar con la autorización de cada asistente. <span class="req">*</span></span></label>
 
       <button type="submit" class="btn btn-rosa enviar" id="btn-enviar">Enviar registro 🎉</button>
-      <p class="nota">Tu entrada queda confirmada una vez verifiquemos el pago.</p>
+      <p class="nota" id="nota-form">Tu entrada queda confirmada una vez verifiquemos el pago.</p>
     </form>
   </div>
 </section>
@@ -530,8 +593,8 @@
 <section id="consulta" class="bg-osc">
   <div class="wrap">
     <span class="eyebrow">Mi entrada</span>
-    <h2 class="sec-title">Consulta el estado de tu pago</h2>
-    <p class="sec-sub">Escribe tu número de documento y revisa si tu pago ya fue verificado.</p>
+    <h2 class="sec-title">Consulta tu pago o reserva</h2>
+    <p class="sec-sub">Escribe tu número de documento y revisa si tu pago ya fue verificado o si tu reserva VIP está activa.</p>
     <div class="consulta">
       <form class="consulta-form" id="form-consulta" novalidate>
         <input id="doc-consulta" inputmode="numeric" maxlength="15" placeholder="Número de documento" aria-label="Número de documento" autocomplete="off">
@@ -549,8 +612,9 @@
     <h2 class="sec-title">Preguntas frecuentes</h2>
     <p class="sec-sub">¿Otra duda? Escríbele por Instagram a cualquiera de las organizadoras.</p>
     <div class="contacto-org" id="contacto-org"></div>
+    <details><summary>¿Cuál es la diferencia entre pagar ya y reservar?</summary><p>Si pagas ya por transferencia, la entrada te sale en <span class="js-precio-ant"></span> por persona. Si reservas sin pagar, la pagas el día de la fiesta en <span class="js-precio-sitio"></span> por persona, pero entras por la <strong>entrada VIP sin hacer fila</strong>. En los dos casos debes registrarte en esta página.</p></details>
     <details><summary>¿Puedo pagar por varias personas en una sola transferencia?</summary><p>Sí. Selecciona cuántas personas van, transfiere el total y registra los datos de cada una. Todas quedan asociadas al mismo comprobante.</p></details>
-    <details><summary>¿Cuándo me confirman la entrada?</summary><p>Después de validar la transferencia te contactamos por WhatsApp al número del titular del registro (asistente 1). También puedes revisar el estado en cualquier momento con tu número de documento en <a href="#consulta">Consulta tu pago</a>.</p></details>
+    <details><summary>¿Cuándo me confirman la entrada?</summary><p>Si pagaste ya, después de validar la transferencia te contactamos por WhatsApp al número del titular del registro (asistente 1). Si reservaste, tu reserva queda activa apenas te registras. En los dos casos puedes revisar el estado con tu número de documento en <a href="#consulta">Consulta tu pago o reserva</a>.</p></details>
     <details><summary>¿Qué debo llevar el día de la fiesta?</summary><p>Tu documento de identidad. Con él te buscamos en la lista de registrados en la entrada de La Pérgola.</p></details>
     <details><summary>¿Dónde queda La Pérgola?</summary><p><span id="txt-direccion"></span> <a class="js-mapa" target="_blank" rel="noopener">Ver en Google Maps</a></p></details>
   </div>
@@ -584,8 +648,9 @@
    ========================================================= */
 const CONFIG = {
   // URL de la implementación de Google Apps Script (termina en /exec)
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzhRCCLVa9iNaoO4Ny8grx2XJiWrRothRWbRAR_b4Sr90brKhrIqef_o2n6uu9AP0ss/exec',
-  PRECIO_PERSONA: 40000,                 // DUMMY
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwyuwTqvPaTGwCXCIvfUlujuBQtDTdo4n5FW_jJimLnPkJXoyoBsB2Ywxlaez8_zipb/exec',
+  PRECIO_ANTICIPADO: 35000,   // pagando ya por transferencia
+  PRECIO_SITIO: 40000,        // reserva: se paga en la entrada VIP
   MAX_PERSONAS: 10,
   NEQUI_NUMERO: '301 264 8660',          // DUMMY
   NEQUI_TITULAR: 'Kathe Jimenez', // DUMMY
@@ -612,7 +677,23 @@ $('#txt-nequi').textContent = CONFIG.NEQUI_NUMERO;
 $('#txt-nequi-titular').textContent = CONFIG.NEQUI_TITULAR;
 $('#txt-llave').textContent = CONFIG.LLAVE_BREB;
 $('#txt-llave-titular').textContent = CONFIG.LLAVE_TITULAR;
-$('#txt-precio').textContent = pesos(CONFIG.PRECIO_PERSONA);
+document.querySelectorAll('.js-precio-ant').forEach(el => el.textContent = pesos(CONFIG.PRECIO_ANTICIPADO));
+document.querySelectorAll('.js-precio-sitio').forEach(el => el.textContent = pesos(CONFIG.PRECIO_SITIO));
+document.querySelectorAll('.js-ahorro').forEach(el => el.textContent = pesos(CONFIG.PRECIO_SITIO - CONFIG.PRECIO_ANTICIPADO));
+
+/* ---------- Modalidad: pagar ya o reservar ---------- */
+function esReserva(){ return document.querySelector('input[name="modalidad"]:checked').value === 'reserva'; }
+function precioActual(){ return esReserva() ? CONFIG.PRECIO_SITIO : CONFIG.PRECIO_ANTICIPADO; }
+function actualizarModalidad(){
+  const r = esReserva();
+  $('#bloque-pago').style.display = r ? 'none' : 'block';
+  $('#bloque-reserva').style.display = r ? 'block' : 'none';
+  $('#lbl-total').textContent = r ? 'Total a pagar en la entrada' : 'Total a transferir';
+  $('#btn-enviar').textContent = r ? 'Reservar mi entrada VIP 🎟️' : 'Enviar registro 🎉';
+  $('#nota-form').textContent = r ? 'Tu reserva queda activa apenas te registras. Pagas en la entrada VIP.' : 'Tu entrada queda confirmada una vez verifiquemos el pago.';
+  if (typeof renderPersonas === 'function' && typeof cont !== 'undefined') renderPersonas();
+}
+document.querySelectorAll('input[name="modalidad"]').forEach(i => i.addEventListener('change', actualizarModalidad));
 $('#txt-direccion').textContent = CONFIG.DIRECCION;
 document.querySelectorAll('.js-mapa').forEach(a => a.href = CONFIG.MAPA);
 document.querySelectorAll('.js-dir').forEach(s => s.textContent = CONFIG.DIRECCION);
@@ -684,7 +765,7 @@ let cantidad = 1;
 const cont = $('#personas');
 
 function plantillaPersona(i){
-  const titular = i === 0 ? '<span class="badge">Titular del pago</span>' : '';
+  const titular = i === 0 ? '<span class="badge">Titular del registro</span>' : '';
   return `
   <div class="persona" data-i="${i}">
     <div class="persona-head"><h4>Asistente ${i+1}</h4>${titular}</div>
@@ -731,7 +812,7 @@ function renderPersonas(){
     [...cont.querySelectorAll('.persona')].slice(cantidad).forEach(el => el.remove());
   }
   $('#cantidad').textContent = cantidad;
-  $('#total').textContent = pesos(cantidad * CONFIG.PRECIO_PERSONA);
+  $('#total').textContent = pesos(cantidad * precioActual());
   $('#menos').disabled = cantidad <= 1;
   $('#mas').disabled = cantidad >= CONFIG.MAX_PERSONAS;
 }
@@ -809,9 +890,11 @@ function validar(){
     datos.tipoDoc = get('tipoDoc').value;
     personas.push(datos);
   });
-  const ref = $('#referencia');
-  if (!marcar(ref, ref.value.trim().length >= 3)) { ok = false; primero = primero || ref; }
-  if (!archivo) { ok = false; drop.classList.add('err'); $('#err-archivo').style.display = 'block'; primero = primero || drop; }
+  if (!esReserva()) {
+    const ref = $('#referencia');
+    if (!marcar(ref, ref.value.trim().length >= 3)) { ok = false; primero = primero || ref; }
+    if (!archivo) { ok = false; drop.classList.add('err'); $('#err-archivo').style.display = 'block'; primero = primero || drop; }
+  }
   if (!$('#habeas').checked) { ok = false; if (!primero) { alerta('Falta tu autorización', 'Debes aceptar el tratamiento de datos personales.'); } }
   if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
   return ok ? personas : null;
@@ -833,23 +916,25 @@ $('#form').addEventListener('submit', async e => {
   if (!personas) return;
 
   const btn = $('#btn-enviar'); btn.disabled = true;
-  modal('<div class="spinner"></div><h3>Enviando…</h3><p>Estamos subiendo tu comprobante. No cierres esta página.</p>', false);
+  const reserva = esReserva();
+  modal(`<div class="spinner"></div><h3>Enviando…</h3><p>${reserva ? 'Estamos guardando tu reserva.' : 'Estamos subiendo tu comprobante.'} No cierres esta página.</p>`, false);
 
   try {
     const payload = {
       personas,
-      metodo: document.querySelector('input[name="metodo"]:checked').value,
-      referencia: $('#referencia').value.trim(),
-      valorUnitario: CONFIG.PRECIO_PERSONA,
-      valorTotal: personas.length * CONFIG.PRECIO_PERSONA,
-      soporte: await prepararArchivo(archivo),
+      modalidad: reserva ? 'reserva' : 'anticipado',
+      metodo: reserva ? 'Pago en sitio' : document.querySelector('input[name="metodo"]:checked').value,
+      referencia: reserva ? '' : $('#referencia').value.trim(),
+      valorUnitario: precioActual(),
+      valorTotal: personas.length * precioActual(),
+      soporte: reserva ? null : await prepararArchivo(archivo),
       userAgent: navigator.userAgent
     };
 
     let res;
     if (CONFIG.SCRIPT_URL.startsWith('PEGAR')) {
       // Modo demo: aún no hay Apps Script conectado
-      console.warn('MODO DEMO — payload:', { ...payload, soporte: { ...payload.soporte, base64: '(omitido)' } });
+      console.warn('MODO DEMO — payload:', { ...payload, soporte: payload.soporte ? '(omitido)' : null });
       await new Promise(r => setTimeout(r, 1200));
       res = { ok: true, codigo: 'DEMO-0001' };
     } else {
@@ -860,27 +945,33 @@ $('#form').addEventListener('submit', async e => {
 
     if (!res.ok) throw new Error(res.error || 'Error desconocido');
 
-    modal(`<div style="font-size:2.6rem">🎉</div><h3>¡Quedaste en la lista!</h3>
-      <p>Registramos <strong>${personas.length} ${personas.length === 1 ? 'persona' : 'personas'}</strong>. Validaremos el pago y te confirmaremos por WhatsApp.</p>
-      <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código de registro. Puedes revisar el estado de tu pago con tu documento en la sección <a href="#consulta" onclick="cerrarModal()">Consulta tu pago</a>.</p>`);
-    $('#form').reset(); $('#quitar').click(); cantidad = 1; cont.innerHTML = ''; renderPersonas();
+    const n = `${personas.length} ${personas.length === 1 ? 'persona' : 'personas'}`;
+    modal(reserva
+      ? `<div style="font-size:2.6rem">🎟️</div><h3>¡Reserva VIP lista!</h3>
+         <p>Reservamos <strong>${n}</strong>. El día de la fiesta lleguen a la <strong>entrada VIP</strong> con su documento y paguen <strong>${pesos(CONFIG.PRECIO_SITIO)}</strong> por persona.</p>
+         <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código. Puedes revisar tu reserva con tu documento en <a href="#consulta" onclick="cerrarModal()">Consulta tu pago o reserva</a>.</p>`
+      : `<div style="font-size:2.6rem">🎉</div><h3>¡Quedaste en la lista!</h3>
+         <p>Registramos <strong>${n}</strong>. Validaremos el pago y te confirmaremos por WhatsApp.</p>
+         <div class="codigo">${res.codigo}</div><p style="font-size:.85rem">Guarda este código. Puedes revisar el estado de tu pago con tu documento en <a href="#consulta" onclick="cerrarModal()">Consulta tu pago o reserva</a>.</p>`);
+    $('#form').reset(); $('#quitar').click(); cantidad = 1; cont.innerHTML = ''; actualizarModalidad();
   } catch (err) {
     alerta('No pudimos registrarte', `${err.message}<br><br>Intenta de nuevo o escríbenos por Instagram: ${CONFIG.ORGANIZADORAS.map(o => `<a href="${o.url}" target="_blank" rel="noopener">${o.nombre}</a>`).join(' · ')}.`);
   } finally {
     btn.disabled = false;
   }
 });
-/* ---------- Consulta de estado de pago ---------- */
+/* ---------- Consulta de pago o reserva ---------- */
 const ESTADOS = {
   'Aprobado':  { cls: 'est-aprobado',  icono: '✅', titulo: '¡Pago verificado!', texto: 'Tu entrada está confirmada. Lleva tu documento de identidad y nos vemos en la pista. 💃' },
   'Pendiente': { cls: 'est-pendiente', icono: '⏳', titulo: 'Pago en revisión',   texto: 'Recibimos tu registro y estamos validando la transferencia. Vuelve a consultar más tarde.' },
-  'Rechazado': { cls: 'est-rechazado', icono: '⚠️', titulo: 'Pago no verificado', texto: 'No pudimos validar tu transferencia. Escríbele por Instagram a una de las organizadoras.' }
+  'Rechazado': { cls: 'est-rechazado', icono: '⚠️', titulo: 'Pago no verificado', texto: 'No pudimos validar tu transferencia. Escríbele por Instagram a una de las organizadoras.' },
+  'Reservado': { cls: 'est-reservado', icono: '🎟️', titulo: 'Reserva VIP activa', texto: `Tu lugar está apartado. Llega a la entrada VIP con tu documento, paga ${pesos(CONFIG.PRECIO_SITIO)} y entra sin hacer fila.` }
 };
 $('#form-consulta').addEventListener('submit', async e => {
   e.preventDefault();
   const input = $('#doc-consulta'), out = $('#resultado'), btn = $('#btn-consulta');
   const doc = input.value.trim();
-  if (!/^[A-Za-z0-9]{5,15}$/.test(doc)) { marcar(input, false); input.focus(); return; }
+  if (!/^[A-Za-z0-9.\s]{5,20}$/.test(doc)) { marcar(input, false); input.focus(); return; }
   marcar(input, true);
   btn.disabled = true; btn.innerHTML = '<span class="spinner mini-spin"></span> Consultando';
   out.classList.add('show');
@@ -889,7 +980,7 @@ $('#form-consulta').addEventListener('submit', async e => {
     let res;
     if (CONFIG.SCRIPT_URL.startsWith('PEGAR')) {
       await new Promise(r => setTimeout(r, 800));
-      res = { ok: true, registros: [{ nombre: 'Demo D.', estado: 'Pendiente', codigo: 'DEMO-0001', fecha: '2026-10-27' }] };
+      res = { ok: true, registros: [{ nombre: 'Demo D.', estado: 'Reservado', codigo: 'DEMO-0001', fecha: '2026-10-27' }] };
     } else {
       const r = await fetch(`${CONFIG.SCRIPT_URL}?accion=consulta&doc=${encodeURIComponent(doc)}`);
       res = await r.json();
@@ -897,7 +988,7 @@ $('#form-consulta').addEventListener('submit', async e => {
     if (!res.ok) throw new Error(res.error || 'Error desconocido');
     if (!res.registros || !res.registros.length) {
       out.innerHTML = `<div class="res-card est-nada"><h4>No encontramos registros</h4>
-        <p>No hay inscripciones con ese documento. Revisa el número o, si ya pagaste, escríbele a una de las organizadoras por Instagram.</p></div>`;
+        <p>No hay inscripciones con ese documento. Revisa el número o escríbele a una de las organizadoras por Instagram.</p></div>`;
       return;
     }
     out.innerHTML = res.registros.map(r => {
@@ -917,6 +1008,7 @@ $('#form-consulta').addEventListener('submit', async e => {
   }
 });
 function escapeHTML(t){ return String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+actualizarModalidad();
 </script>
 </body>
 </html>
